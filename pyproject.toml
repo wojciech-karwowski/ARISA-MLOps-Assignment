@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "ARISA_DSML"
 version = "0.0.1"
-description = "trying to predict heart disease"
+description = "Predicition of heart disease"
 authors = [
   { name = "Wojciech" },
 ]
@@ -15,18 +15,21 @@ classifiers = [
     "Programming Language :: Python :: 3",
     
 ]
-requires-python = "~=3.11.0"
+requires-python = "~=3.11"
 
-
-[tool.ruff]
+[tool.black]
 line-length = 99
-src = ["ARISA_DSML"]
-include = ["pyproject.toml", "ARISA_DSML/**/*.py"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
 
 [tool.ruff.lint]
-extend-select = ["I"]  # Add import sorting
-
+select = ["ALL"]
+ignore = ["E731", "E266", "E501", "C901", "N803", "FBT001", "FBT002", "N806", "E231", "E225", "E227", "W391", "E252", "E226"]
 [tool.ruff.lint.isort]
 known-first-party = ["ARISA_DSML"]
 force-sort-within-sections = true
-
