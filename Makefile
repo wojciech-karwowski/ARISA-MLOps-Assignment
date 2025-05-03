@@ -14,7 +14,7 @@ PYTHON_INTERPRETER = python
 ## Install Python dependencies
 .PHONY: requirements
 requirements:
-	uv pip install -r requirements.txt
+	pip install -r requirements.txt
 	
 
 
