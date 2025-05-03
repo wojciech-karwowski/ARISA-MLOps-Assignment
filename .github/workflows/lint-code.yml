@@ -23,4 +23,9 @@ jobs:
         run: make requirements
       - name: Lint using flake8 and black
         run: make lint
+
+      - name: Install Rust
+        run: |
+          rustup install stable
+          rustup default stable
         
