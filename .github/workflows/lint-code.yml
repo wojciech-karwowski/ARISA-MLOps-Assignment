@@ -20,6 +20,13 @@ jobs:
         with: 
           python-version: "3.11"
 
+      - name: Upgrade pip and maturin
+        run: |
+          pip install --upgrade pip maturin
+      
+      - name: Install project dependencies
+        run: pip install -r requirements.txt
+
       - name: Install Rust
         run: |
           rustup install stable
