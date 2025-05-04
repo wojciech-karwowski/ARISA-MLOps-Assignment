@@ -1,8 +1,6 @@
 """Functions for preprocessing the data."""
 
 from pathlib import Path
-import os
-
 from kaggle.api.kaggle_api_extended import KaggleApi
 from sklearn.model_selection import train_test_split
 from loguru import logger
@@ -14,7 +12,7 @@ from ARISA_DSML.config import DATASET, PROCESSED_DATA_DIR, RAW_DATA_DIR
 def get_raw_data() -> None:
     """Download and extract raw heart disease dataset from Kaggle."""
     dataset_name = DATASET
-    download_folder = RAW_DATA_DIR 
+    download_folder = RAW_DATA_DIR
     download_folder.mkdir(parents=True, exist_ok=True)
 
     api = KaggleApi()
@@ -31,7 +29,6 @@ def preprocess_df(file:str|Path) -> tuple[Path, Path]:
     df = pd.read_csv(file)
 
     # Clean column names
-    
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
     # Drop duplicates
@@ -72,4 +69,3 @@ if __name__ == "__main__":
     train_path, test_path = preprocess_df(df)
 
     logger.info("Saving preprocessed data")
-    

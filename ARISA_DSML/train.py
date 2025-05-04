@@ -23,7 +23,8 @@ from ARISA_DSML.helpers import get_git_commit_hash
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
-def run_hyperopt(X_train:pd.DataFrame, y_train:pd.DataFrame, test_size:float=0.25, n_trials:int=20, overwrite:bool=False)->str|Path: 
+
+def run_hyperopt(X_train:pd.DataFrame, y_train:pd.DataFrame, test_size:float=0.25, n_trials:int=20, overwrite:bool=False)->str|Path:
     """Run optuna hyperparameter tuning."""
     best_params_path = MODELS_DIR / "best_params.pkl"
     if not best_params_path.is_file() or overwrite:
@@ -91,6 +92,7 @@ def train_cv(X_train:pd.DataFrame, y_train:pd.DataFrame, params:dict, eval_metri
     cv_results.to_csv(cv_output_path, index=False)
 
     return cv_output_path
+
 
 def train(
     X_train: pd.DataFrame,
@@ -185,6 +187,7 @@ def train(
         joblib.dump(loggable_params, model_params_path)
 
     return (model_path, model_params_path)
+
 
 def plot_error_scatter(  # noqa: PLR0913
         df_plot:pd.DataFrame,

@@ -5,9 +5,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from loguru import logger
 import shap
-import joblib
 import os
-from ARISA_DSML.config import FIGURES_DIR, MODELS_DIR, target, PROCESSED_DATA_DIR,  MODEL_NAME
+from ARISA_DSML.config import FIGURES_DIR, MODELS_DIR, target, PROCESSED_DATA_DIR, MODEL_NAME
 from ARISA_DSML.resolve import get_model_by_alias
 import mlflow
 from mlflow.client import MlflowClient
@@ -51,7 +50,6 @@ if __name__=="__main__":
     log_model_meta = json.loads(run.data.tags['mlflow.log-model.history'])
     log_model_meta[0]['signature']
 
-
     _, artifact_folder = os.path.split(model_info.source)
     logger.info(artifact_folder)
     model_uri = "runs:/{}/{}".format(model_info.run_id, artifact_folder)
@@ -61,5 +59,4 @@ if __name__=="__main__":
     params = run_data_dict["params"]
     params["feature_columns"] = [inp["name"] for inp in json.loads(log_model_meta[0]['signature']['inputs'])]
     preds_path = predict(loaded_model, df_test, params)
-
 
