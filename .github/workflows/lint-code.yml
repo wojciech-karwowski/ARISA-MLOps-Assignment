@@ -19,32 +19,6 @@ jobs:
         uses: actions/setup-python@v4
         with: 
           python-version: "3.11"
-      
-      - name: Install project dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install Rust
-        run: |
-          rustup install stable
-          rustup default stable
-
-      - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          rustup update
-          rustup component add clippy
-    
-      - name: Run Build
-        run: make requirements
-    
       - name: Install dependencies
         run: make requirements
       - name: Lint using flake8 and black
