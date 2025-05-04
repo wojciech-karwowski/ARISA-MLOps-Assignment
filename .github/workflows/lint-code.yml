@@ -45,9 +45,6 @@ jobs:
           pip install -r requirements.txt
           rustup update
           rustup component add clippy
-          
-      - name: Install Rust toolchain
-        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
       - name: Build pywinpty
         run: maturin pep517 build-wheel -i python
