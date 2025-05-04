@@ -41,21 +41,20 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
           rustup update
           rustup component add clippy
-
-      - name: Set up dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          
       - name: Install Rust toolchain
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+      - name: Build pywinpty
+        run: maturin pep517 build-wheel -i python
     
       - name: Run Build
         run: make requirements
     
-
       - name: Install dependencies
         run: make requirements
       - name: Lint using flake8 and black
