@@ -5,7 +5,7 @@ name: code checking
 on:
   pull_request:
     branches:
-      - main
+      - task-02-wwsi-mlflow
 
 # run install and lint steps from makefile
 jobs:
