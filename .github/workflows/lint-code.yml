@@ -47,7 +47,7 @@ jobs:
           rustup component add clippy
 
       - name: Build pywinpty
-        run: maturin pep517 build-wheel -i python
+        run: maturin build --interpreter python
     
       - name: Run Build
         run: make requirements
