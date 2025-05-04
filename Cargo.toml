@@ -1,0 +1,14 @@
+[package]
+name = "arisa_dsml"
+version = "0.0.1"
+edition = "2018"
+
+[dependencies]
+pyo3 = { version = "0.18", features = ["extension-module"] }
+
+[lib]
+name = "arisa_dsml"
+path = "src/lib.rs"
+
+[dependencies.maturin]
+version = "0.13"
