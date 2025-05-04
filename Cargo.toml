@@ -9,6 +9,4 @@ pyo3 = { version = "0.18", features = ["extension-module"] }
 [lib]
 name = "arisa_dsml"
 path = "src/lib.rs"
-
-[dependencies.maturin]
-version = "0.13"
+crate-type = ["cdylib"]
