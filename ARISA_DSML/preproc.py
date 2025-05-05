@@ -22,6 +22,7 @@ def get_raw_data() -> None:
     api.dataset_download_files("mexwell/heart-disease-dataset", path=str(download_folder), unzip=True)
 
     logger.info("Download complete.")
+    return RAW_DATA_DIR / "heart_statlog_cleveland_hungary_final.csv"
 
 
 def preprocess_df(file:str|Path) -> tuple[Path, Path]:
