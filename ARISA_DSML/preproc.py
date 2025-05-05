@@ -67,6 +67,6 @@ if __name__ == "__main__":
 
     logger.info(f"Preprocessing and splitting data from {raw_csv}")
     df = pd.read_csv(raw_csv)
-    train_path, test_path = preprocess_df(df)
+    train_path, test_path = preprocess_df(raw_csv)
 
     logger.info("Saving preprocessed data")
