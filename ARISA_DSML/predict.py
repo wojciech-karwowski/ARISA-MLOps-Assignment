@@ -12,6 +12,7 @@ import mlflow
 from mlflow.client import MlflowClient
 import json
 
+#functions
 
 def plot_shap(model:CatBoostClassifier, df_plot:pd.DataFrame)->None:
     """Plot model shapley overview plot."""
