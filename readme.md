@@ -1,29 +1,61 @@
-ARISA MLOps Final Graded Assignment
-Termin: 10 maja 2025 23:59
+# heart-disease-classification
 
-Instrukcje
+<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
+    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
+</a>
 
-Assignment overview
-In this assignment you will take all of the theory and architecture developments we have worked on from lessons 1 through 5 and apply them to a new dataset. 
+trying to predict heart disease
 
-Instructions
-Review the course content of lessons 1 to 5, as well as the code and README.md in https://github.com/clausagerskov/ARISA-MLOps and the architectural diagrams.
-Create a new, public repository on Github (do not fork the course repository, but do use it as a guide for constructing your own).
-Find a new dataset on Kaggle (https://www.kaggle.com/datasets) and implement the same architecture on that new dataset, while referring back to the first four levels of the MLOps Maturity Assessment (https://marvelousmlops.substack.com/p/mlops-maturity-assessment). 
-The existing preproc and train code will not work on your new dataset, so refactoring is needed.
-Remember the clean and reproducible code guidelines of the first lesson, e.g. working in appropriately named branches, protecting the main branch, code linting workflow, making pull requests, etc.
-It is highly recommended to choose a small tabular dataset, either classification or regression, and no more than a couple of megabytes to both keep costs low and reduce time needed to debug pipelines.
-Regarding MLFlow hosting, it is also recommended to host the metadata database locally on the Codespaces instance to reduce costs. 
-For the artifact store, any cloud storage can be used. We have used S3 in this course, but any is okay, and there are guides on the internet as well for setting up MLFlow to connect to google drive.
-You are allowing to change any part of the infrastructure, but if you decide to do so, please make an updated diagram and specify what you changed and why.
+## Project Organization
 
-After implementing the infrastructure and successfully running the pipelines on the new dataset, write a report where you describe, for each point in the first four levels of the MLOps Maturity Assessment, how that part of is implemented in your code and motivation for that solution.
+```
+├── LICENSE            <- Open-source license if one is chosen
+├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
+├── README.md          <- The top-level README for developers using this project.
+├── data
+│   ├── external       <- Data from third party sources.
+│   ├── interim        <- Intermediate data that has been transformed.
+│   ├── processed      <- The final, canonical data sets for modeling.
+│   └── raw            <- The original, immutable data dump.
+│
+├── docs               <- A default mkdocs project; see www.mkdocs.org for details
+│
+├── models             <- Trained and serialized models, model predictions, or model summaries
+│
+├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
+│                         the creator's initials, and a short `-` delimited description, e.g.
+│                         `1.0-jqp-initial-data-exploration`.
+│
+├── pyproject.toml     <- Project configuration file with package metadata for 
+│                         ARISA_DSML and configuration for tools like black
+│
+├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+│
+├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures        <- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze > requirements.txt`
+│
+├── setup.cfg          <- Configuration file for flake8
+│
+└── ARISA_DSML   <- Source code for use in this project.
+    │
+    ├── __init__.py             <- Makes ARISA_DSML a Python module
+    │
+    ├── config.py               <- Store useful variables and configuration
+    │
+    ├── dataset.py              <- Scripts to download or generate data
+    │
+    ├── features.py             <- Code to create features for modeling
+    │
+    ├── modeling                
+    │   ├── __init__.py 
+    │   ├── predict.py          <- Code to run model inference with trained models          
+    │   └── train.py            <- Code to train models
+    │
+    └── plots.py                <- Code to create visualizations
+```
 
-Remember, this assignment is graded.
+--------
 
-Full marks will be given for a link to a new repository with successful pipeline runs on a new data (i.e. not Titanic), and a report with descriptions and motivations.
-
-Finally, remember the last slide of the first presentation:
-LMGTFY: https://letmegooglethat.com/ and 
-RTFM: https://medium.com/@shivam2003/rtfm-a-guide-to-not-just-surviving-but-thriving-as-a-developer-42fa1d3ff546
-and if you can't figure things out by yourself: https://medium.com/@katiebrouwers/why-rubber-ducking-is-one-of-your-greatest-resources-as-a-developer-99ac0ee5b70a
