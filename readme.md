@@ -132,5 +132,46 @@ CatBoost provides competitive performance on structured datasets, maintains cons
 
 ### Running on local machine
 
-<code> git clone https://github.com/KK-MUT/MLOps-Final.git
+Clone the repository:
+``` bash
+git clone https://github.com/wojciech-karwowski/ARISA-MLOps-Assignment.git
+```
 
+Change the working directory:
+``` bash
+cd ARISA-MLOps-Assignment
+```
+
+Create virtual environment:
+``` bash
+py -3.11 -m venv .venv
+```
+
+Activate virtual environment
+``` bash
+# on Windows:
+.\.venv\Scripts\activate
+
+# on Linux/Mac:
+source .venv/bin/activate
+```
+
+Install dependencies:
+``` bash
+pip install -r requirements.txt
+```
+
+``` bash
+
+```
+Opis projektu
+
+Jak uruchomić lokalnie (setup, instalacja)
+
+Jak trenować model (make train)
+
+Jak uruchomić predykcję
+
+Gdzie są wyniki (np. mlruns/, output/)
+
+Linki do dokumentacji
