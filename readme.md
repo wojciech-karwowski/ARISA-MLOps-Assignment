@@ -16,18 +16,17 @@ The aim of this project is to build, evaluate, and deploy a machine learning mod
 
 # Dataset
 
-Dataset: Heart Disease Dataset (https://www.kaggle.com/datasets/mexwell/heart-disease-dataset)
-
-Author: mexwell
-
-Subject Area: Heart Conditions, Drugs and Medications, Binary Classification, Medicine
+Dataset: Heart Disease Dataset (https://www.kaggle.com/datasets/mexwell/heart-disease-dataset)<br>
+Author: mexwell<br>
+Subject Area: Heart Conditions, Drugs and Medications, Binary Classification, Medicine<br>
 
 The heart disease dataset is curated by combining 5 popular heart disease datasets already available independently but not combined before. In this dataset, 5 heart datasets are combined over 11 common features which makes it the largest heart disease dataset available so far for research purposes. The five datasets used for its curation are:
-- Cleveland-
+- Cleveland
 - Hungarian
 - Switzerland
 - Long Beach VA
 - Statlog (Heart) Data Set
+
 This dataset consists of 1190 instances with 11 features. These datasets were collected and combined at one place to help advance research on CAD-related machine learning and data mining algorithms, and hopefully to ultimately advance clinical diagnosis and early treatment.
 
 | No   | Attribute                              | Code given          | Unit                    | Data type |
@@ -48,8 +47,12 @@ This dataset consists of 1190 instances with 11 features. These datasets were co
 
 ## ML Model Description
 
+The classifier is implemented using CatBoostClassifier, a gradient boosting algorithm on decision trees optimized for categorical and numerical tabular data. A core feature of CatBoost is its native support for categorical variables, which are internally transformed using target-based encoding schemes derived from order statistics. This approach avoids the need for explicit one-hot or label encoding and preserves the statistical distribution of features. <br>
 
-The classifier uses the **CatBoostClassifier model** (gradient boosting algorithm). The characteristic feature of the model is native support for categorical data without the need for prior encoding (e.g. by one-hot encoding). Instead, CatBoost uses internal mechanisms based on order statistics, which allow to preserve data properties and reduce the risk of overfitting. This model is also distinguished by its resistance to overfitting thanks to the use of the so-called ordered boosting, a special procedure for creating training sets in such a way as to avoid information leakage between examples.
+CatBoost mitigates the risk of overfitting through the use of ordered boosting, a technique that constructs training sets for each iteration in a way that prevents target leakage. This is achieved by ensuring that the target value of an observation is never used in its own encoding. Additionally, the algorithm includes regularization techniques and built-in cross-validation to enhance generalization.<br>
+
+CatBoost provides competitive performance on structured datasets, maintains consistency across random seeds, and is efficient in terms of training speed and handling of missing values.
+
 
 ### Hyperparameter tuning:
 - Implemented using Optun and mlflow.start_run(nested=True)
