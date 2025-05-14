@@ -1,6 +1,6 @@
 # ARISA-MLOps Heart Disease Classification
 
-# Project description
+## Project description
 
 The aim of this project is to build, evaluate, and deploy a machine learning model that can predict the presence of heart disease based on patient health data. Using a dataset from Kaggle, we aim to support early diagnosis and risk assessment for cardiovascular conditions.
 
@@ -14,7 +14,7 @@ The aim of this project is to build, evaluate, and deploy a machine learning mod
 | **Reproducibility**      | Results may vary if experiments aren't properly tracked or versioned.          | Ensure all experiments use `random_state`, `joblib`, `mlflow`, and `git` version control. |
 
 
-# Dataset
+## Dataset
 
 Dataset: Heart Disease Dataset (https://www.kaggle.com/datasets/mexwell/heart-disease-dataset)<br>
 Author: mexwell<br>
@@ -115,5 +115,22 @@ CatBoost provides competitive performance on structured datasets, maintains cons
 
 --------
 
+###
 
+
+## Setup
+
+### Requirements
+
+- Git & GitHub — version control and collaboration
+- Python 3.11.9 or higher
+- Jupyter Notebook environment
+- Pandas and NumPy libraries
+- Scikit-learn library
+- Matplotlib and Seaborn library
+- MLflow — experiment tracking
+
+### Running on local machine
+
+<code> git clone https://github.com/KK-MUT/MLOps-Final.git
 
