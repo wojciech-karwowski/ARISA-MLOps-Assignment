@@ -1,10 +1,61 @@
-# heart-disease-classification
+# ARISA-MLOps Heart Disease Classification
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+# Project description
 
-trying to predict heart disease
+The aim of this project is to build, evaluate, and deploy a machine learning model that can predict the presence of heart disease based on patient health data. Using a dataset from Kaggle, we aim to support early diagnosis and risk assessment for cardiovascular conditions.
+
+## Model Risk Assessment
+
+| **Risk Category**        | **Description**                                                                 | **Mitigation Strategy**                                                                 |
+|--------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| **Data Bias**            | Lack of demographic features (e.g., ethnicity, geography) may reduce fairness and generalization across populations. | Clearly document dataset limitations; consider adding diverse features in future versions. |
+| **Model Dependency**     | Strong reliance on CatBoost may limit portability and increase maintenance risk if the library becomes unsupported. | Track library versions; consider exporting to ONNX or evaluating alternative models.     |
+| **Overfitting**          | Model might perform well on training data but poorly on new data.              | Use early stopping, cross-validation, and monitor validation metrics closely.            |
+| **Reproducibility**      | Results may vary if experiments aren't properly tracked or versioned.          | Ensure all experiments use `random_state`, `joblib`, `mlflow`, and `git` version control. |
+
+
+# Dataset
+
+Dataset: Heart Disease Dataset (https://www.kaggle.com/datasets/mexwell/heart-disease-dataset)
+Author: mexwell
+Subject Area: Heart Conditions, Drugs and Medications, Binary Classification, Medicine
+
+The heart disease dataset is curated by combining 5 popular heart disease datasets already available independently but not combined before. In this dataset, 5 heart datasets are combined over 11 common features which makes it the largest heart disease dataset available so far for research purposes. The five datasets used for its curation are:
+•	Cleveland
+•	Hungarian
+•	Switzerland
+•	Long Beach VA
+•	Statlog (Heart) Data Set.
+This dataset consists of 1190 instances with 11 features. These datasets were collected and combined at one place to help advance research on CAD-related machine learning and data mining algorithms, and hopefully to ultimately advance clinical diagnosis and early treatment.
+
+| S.No | Attribute                              | Code given          | Unit                    | Data type |
+|------|----------------------------------------|---------------------|-------------------------|-----------|
+| 1    | Age                                    | Age                 | in years                | Numeric   |
+| 2    | Sex                                    | Sex                 | 1, 0                    | Binary    |
+| 3    | Chest pain type                        | Chest pain type     | 1, 2, 3, 4              | Nominal   |
+| 4    | Resting blood pressure                 | Resting bp s        | in mm Hg                | Numeric   |
+| 5    | Serum cholesterol                      | Cholesterol         | in mg/dl                | Numeric   |
+| 6    | Fasting blood sugar                    | Fasting blood sugar | 1, 0 > 120 mg/dl        | Binary    |
+| 7    | Resting electrocardiogram results      | Resting ecg         | 0, 1, 2                 | Nominal   |
+| 8    | Maximum heart rate achieved            | Max heart rate      | 71–202                  | Numeric   |
+| 9    | Exercise induced angina                | Exercise angina     | 0, 1                    | Binary    |
+| 10   | Oldpeak = ST                           | Oldpeak             | Depression              | Numeric   |
+| 11   | The slope of the peak exercise ST seg. | ST slope            | 0, 1, 2                 | Nominal   |
+| 12   | Class (Heart disease presence)         | Target              | 0, 1                    | Binary    |
+
+
+## ML Model Description
+
+
+The classifier uses the **CatBoostClassifier model** (gradient boosting algorithm). The characteristic feature of the model is native support for categorical data without the need for prior encoding (e.g. by one-hot encoding). Instead, CatBoost uses internal mechanisms based on order statistics, which allow to preserve data properties and reduce the risk of overfitting. This model is also distinguished by its resistance to overfitting thanks to the use of the so-called ordered boosting, a special procedure for creating training sets in such a way as to avoid information leakage between examples.
+
+### Hyperparameter tuning:
+- Implemented using Optun and mlflow.start_run(nested=True)
+- Parameters are saved to the best_params.pkl file and logged in MLflow
+
+### Cross-validation
+- Implemented by catboost.cv with 5-fold stratified shuffle
+- Results (F1 and logloss) are visualized with standard errors using Plotly
 
 ## Project Organization
 
@@ -58,4 +109,6 @@ trying to predict heart disease
 ```
 
 --------
+
+
 
