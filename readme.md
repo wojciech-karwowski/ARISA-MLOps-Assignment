@@ -200,47 +200,34 @@ then open http://localhost:5000 in your browser to view logged experiments.
 - Project environment (venv + pyproject.toml, setup.cfg files) fully reproducible – defined as code
 - Unified runtime environment (works locally and on GitHub Actions without modifications)
 - Possibility to clearly link model launch to:
-- - source code (commit Git),
-- - infrastructure (pipeline, environment),
-- - training data (CSV file or artifact in MLflow).
+  - source code (commit Git),
+  - infrastructure (pipeline, environment),
+  - training data (CSV file or artifact in MLflow).
 
 ## Code Quality
 
-TInfrastructure Code Quality
 The CI pipeline implemented via GitHub Actions automatically validates configuration and runs tests whenever code changes are introduced.
 
 All updates to the codebase must go through pull requests, and are subject to review by other team members before being merged into the main branch.
 
-ML Model Code Quality
 Pre-commit hooks using flake8 enforce code style consistency across the project.
 
 The ML codebase is modular and includes unit tests for:
-
-Data processing
-
-Model training
-
-Predictions
+ - Data processing
+ - Model training
+ - Predictions
 
 After each pull request, the CI pipeline (lint-code.yml) runs linting and validation checks.
 
-A dedicated prediction pipeline (predict_on_model_change.yml) is triggered when:
+A dedicated prediction pipeline (predict_on_model_change.yml) is triggered when change of:
+- test.csv, train.csv
+- predict.py
+- catboost_model_diabetes.cbm
 
-test.csv, train.csv
-
-predict.py
-
-catboost_model_diabetes.cbm
-are changed.
-
-A separate retraining pipeline (retrain_on_change.yml) is executed when:
-
-test.csv, train.csv
-
-preproc.py, train.py
-
-best_params.pkl
-are modified.
+A separate retraining pipeline (retrain_on_change.yml) is executed when moddifed are:
+- test.csv, train.csv
+- preproc.py, train.py
+- best_params.pkl
 
 Documentation is treated as code and maintained in Markdown files and Python docstrings.
 
@@ -249,34 +236,10 @@ Each model update is accompanied by release notes in pull request descriptions.
 
 ## Monitoring & Support
 
-Infrastructure Monitoring
-The system includes alerting mechanisms to capture issues such as:
+- An automated alerting mechanism detects issues such as pipeline failures, deployment errors, or execution timeouts, enabling rapid response and resolution.
 
-CI/CD pipeline failures
+- Each execution of the CI/CD pipeline is fully logged, including runtime duration, status (success/failure), and detailed console output, ensuring traceability and auditability.
 
-Deployment errors
+-  every model training cycle, key validation metrics (e.g., F1-score, Accuracy, LogLoss) are logged and versioned. Historical performance is tracked using MLflow, facilitating model evaluation over time.
 
-Execution timeouts
-
-This ensures prompt identification of problems and enables rapid troubleshooting.
-
-Application Monitoring
-Each pipeline execution is logged automatically, including:
-
-Execution duration
-
-Status (success/failure)
-
-Detailed console output
-
-Logs are stored in CI/CD run history (e.g., GitHub Actions logs), providing traceability for all runs.
-
-KPI & Model Performance Monitoring
-Key validation metrics (e.g., Accuracy, F1-score, LogLoss) are recorded and versioned with each model training.
-
-Metrics are logged using MLflow, enabling comparison across model versions and identifying performance degradation over time.
-
-Data Drift & Outlier Detection
-Feature distributions from production data (e.g., age, glucose level, cholesterol) can be compared against the training set.
-
-If significant distribution changes are detected (data drift), alerts are raised or automatic retraining is triggered based on predefined thresholds.
+- Feature distributions (e.g., age, cholesterol, resting blood pressure) are monitored for potential data drift. These distributions are regularly compared with training data, and if significant deviation is detected, alerts are issued or automatic retraining is triggered.
