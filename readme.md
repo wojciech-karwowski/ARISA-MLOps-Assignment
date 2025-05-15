@@ -115,12 +115,10 @@ CatBoost provides competitive performance on structured datasets, maintains cons
 
 --------
 
-###
-
 
 ## Setup
 
-### Requirements
+### Prerequisites
 
 - Git & GitHub — version control and collaboration
 - Python 3.11.9 or higher
@@ -132,7 +130,15 @@ CatBoost provides competitive performance on structured datasets, maintains cons
 
 ### Running on local machine
 
-Clone the repository:
+Install python 3.11 with py manager on your local machine.<br>
+Install Visual Studio Code on your local machine.<br>
+Create a kaggle account and create a kaggle api key kaggle.json file.<br>
+Move the kaggle.json to<br>
+C:\Users\USERNAME\.kaggle folder for windows,<br>
+/home/username/.config/kaggle folder for mac or linux.<br>
+
+
+Clone the repository to your local machine:
 ``` bash
 git clone https://github.com/wojciech-karwowski/ARISA-MLOps-Assignment.git
 ```
@@ -147,7 +153,7 @@ Create virtual environment:
 py -3.11 -m venv .venv
 ```
 
-Activate virtual environment
+Activate virtual environment:
 ``` bash
 # on Windows:
 .\.venv\Scripts\activate
@@ -161,17 +167,116 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
+Experiment tracking in MLFlow:
 ``` bash
-
+mlflow ui
 ```
-Opis projektu
+then open http://localhost:5000 in your browser to view logged experiments.
 
-Jak uruchomić lokalnie (setup, instalacja)
+## Traceability and Reproducibility
 
-Jak trenować model (make train)
+- The entire infrastructure is managed as code (IaC) and maintained in the Git repository under .github/workflows.
+- All changes are introduced through pull requests, triggering automated deployment via GitHub Actions.
+- Direct commits to the main branch are protected by workflow.
+- CI/CD pipelines are used for applying changes, ensuring consistency and traceability.
+- Source code for data preprocessing, model training, and API logic is stored under a version-controlled ARISA_DSML/ directory.
+- All modifications to the codebase are implemented via pull requests to ensure auditability and peer review.
+- The project environment, including virtual environment, dependencies, and configuration, is fully reproducible using pyproject.toml, setup.cfg, and optionally venv.
+- A unified runtime ensures that the code runs identically in local development and GitHub Actions without adjustments.
 
-Jak uruchomić predykcję
 
-Gdzie są wyniki (np. mlruns/, output/)
 
-Linki do dokumentacji
+
+
+
+- Introducing changes only via pull requests, with automatic deployment via GitHub Actions
+- Securing the main branch from direct commits
+- Pipeline CI/CD as the only source of implementing changes
+- Configuring two environments according to the assumptions of the repository and pipelines
+- Access of environments to identical data (e.g. consistency of input data in pipelines)
+
+- Data processing, model training and API code saved in versioned folder ARISA_DSML/
+- All code changes introduced by PRs
+- Project environment (venv + pyproject.toml, setup.cfg files) fully reproducible – defined as code
+- Unified runtime environment (works locally and on GitHub Actions without modifications)
+- Possibility to clearly link model launch to:
+- - source code (commit Git),
+- - infrastructure (pipeline, environment),
+- - training data (CSV file or artifact in MLflow).
+
+## Code Quality
+
+TInfrastructure Code Quality
+The CI pipeline implemented via GitHub Actions automatically validates configuration and runs tests whenever code changes are introduced.
+
+All updates to the codebase must go through pull requests, and are subject to review by other team members before being merged into the main branch.
+
+ML Model Code Quality
+Pre-commit hooks using flake8 enforce code style consistency across the project.
+
+The ML codebase is modular and includes unit tests for:
+
+Data processing
+
+Model training
+
+Predictions
+
+After each pull request, the CI pipeline (lint-code.yml) runs linting and validation checks.
+
+A dedicated prediction pipeline (predict_on_model_change.yml) is triggered when:
+
+test.csv, train.csv
+
+predict.py
+
+catboost_model_diabetes.cbm
+are changed.
+
+A separate retraining pipeline (retrain_on_change.yml) is executed when:
+
+test.csv, train.csv
+
+preproc.py, train.py
+
+best_params.pkl
+are modified.
+
+Documentation is treated as code and maintained in Markdown files and Python docstrings.
+
+Each model update is accompanied by release notes in pull request descriptions.
+
+
+## Monitoring & Support
+
+Infrastructure Monitoring
+The system includes alerting mechanisms to capture issues such as:
+
+CI/CD pipeline failures
+
+Deployment errors
+
+Execution timeouts
+
+This ensures prompt identification of problems and enables rapid troubleshooting.
+
+Application Monitoring
+Each pipeline execution is logged automatically, including:
+
+Execution duration
+
+Status (success/failure)
+
+Detailed console output
+
+Logs are stored in CI/CD run history (e.g., GitHub Actions logs), providing traceability for all runs.
+
+KPI & Model Performance Monitoring
+Key validation metrics (e.g., Accuracy, F1-score, LogLoss) are recorded and versioned with each model training.
+
+Metrics are logged using MLflow, enabling comparison across model versions and identifying performance degradation over time.
+
+Data Drift & Outlier Detection
+Feature distributions from production data (e.g., age, glucose level, cholesterol) can be compared against the training set.
+
+If significant distribution changes are detected (data drift), alerts are raised or automatic retraining is triggered based on predefined thresholds.
