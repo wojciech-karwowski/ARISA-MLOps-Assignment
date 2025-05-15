@@ -2,13 +2,14 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = heart-disease-classification
+PROJECT_NAME = ARISA-MLOps-Assignment
 PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
+
 
 ## Install Python Dependencies
 .PHONY: requirements

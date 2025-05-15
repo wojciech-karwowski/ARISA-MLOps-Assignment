@@ -1,0 +1,12 @@
+[package]
+name = "arisa_dsml"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] }
+
+[lib]
+name = "arisa_dsml"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
